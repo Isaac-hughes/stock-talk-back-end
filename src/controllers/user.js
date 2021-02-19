@@ -2,7 +2,8 @@ const { User } = require("../models/User");
 
 
 exports.getMyProfile = (req, res) => {
-  res.status(200).send(req.user)
+    console.log("called")
+  res.status(200).send(req.user.watchlist)
 }
 
 
@@ -35,7 +36,6 @@ exports.updateUserById = async (req, res) => {
 
 exports.deleteUser = async (req, res) => {
   try {
-    console.log('called')
     await req.user.remove()
     res.status(200).send("User deleted");
   } catch (error) {
