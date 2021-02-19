@@ -64,3 +64,11 @@ exports.logout = async (req, res) => {
     res.state(500).send({message: "Unable to log out"})
   }
 }
+
+// exports.addToWatchlist = async (req, res) => {
+//     try {
+//         let list = await 
+//     } catch (error) {
+        
+//     }
+// }
