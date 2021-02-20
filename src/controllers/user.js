@@ -1,9 +1,11 @@
 const { User } = require("../models/User");
 
 
-exports.getMyProfile = (req, res) => {
-    console.log("called")
-  res.status(200).send(req.user.watchlist)
+exports.getMyProfile = async (req, res) => {
+    let data = await req.user
+    console.log(data)
+
+  res.status(200).send(data)
 }
 
 
@@ -65,10 +67,14 @@ exports.logout = async (req, res) => {
   }
 }
 
-// exports.addToWatchlist = async (req, res) => {
-//     try {
-//         let list = await 
-//     } catch (error) {
-        
-//     }
-// }
+exports.addToWatchlist = async (req, res) => {
+    try {
+        const user = await User.findById(req.user._id);
+        user.watchlist.push(req.body)
+        await user.save()
+        res.status(200).send(user.watchlist)
+    } catch (error) {
+        console.log(error)
+        res.status(500).send({message: "error adding to watchlist"})
+    }
+}
