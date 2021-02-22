@@ -26,3 +26,8 @@ exports.auth = async (req, res, next) => {
         res.status(401).send({message: "Please login"})
     }    
 }
+
+exports.test = async (req, res, next) => {
+    console.log("Test passed")
+    next()
+}
