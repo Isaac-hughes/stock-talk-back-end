@@ -1,9 +1,8 @@
 require("./db/connection");
 const express = require("express");
 const cors = require('cors')
-// const { Post } = require("./models/Post");
 const { userRouter } = require("./routes/user");
-// const { postRouter } = require("./routes/posts");
+const { postRouter } = require("./routes/posts");
 
 const port = process.env.PORT || 5000;
 const app = express();
@@ -11,7 +10,7 @@ const app = express();
 app.use(cors())
 app.use(express.json());
 app.use(userRouter);
-// app.use(postRouter);
+app.use(postRouter);
 
 app.get("/health", (req, res) => {
   res.status(200).send({ message: "API is working" });

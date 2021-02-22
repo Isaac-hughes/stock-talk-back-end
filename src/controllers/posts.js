@@ -1,4 +1,4 @@
-const { Post } = require("../models/Post");
+const { Post } = require("../models/Posts");
 
 exports.getAllPosts = async (req, res) => {
   try {
@@ -51,3 +51,7 @@ exports.deletePost = async (req, res) => {
     res.status(404).send({ message: "user not found" });
   }
 };
+
+exports.tester = (req, res) => {
+  res.status(200).send({message: "test passed"})
+}
