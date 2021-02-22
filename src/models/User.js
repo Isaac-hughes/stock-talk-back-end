@@ -21,6 +21,12 @@ const userSchema = new mongoose.Schema({
         required: true,
         unique: true
     },
+    "following": [
+        {username: String}
+    ],
+    "followers": [
+        {username: String}
+    ],
     "watchlist": [
         {ticker: {type: String}}
     ],
