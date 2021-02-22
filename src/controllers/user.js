@@ -78,3 +78,22 @@ exports.addToWatchlist = async (req, res) => {
         res.status(500).send({message: "error adding to watchlist"})
     }
 }
+
+exports.removeFromWatchlist = async (req, res) => {
+    try {
+        const user = await User.findById(req.user._id);
+        let data = user.watchlist
+        let newArr = []
+        for (i in data){
+            if (data[i].ticker != req.body.ticker){
+                newArr.push(data[i])
+            }
+        }
+        user.watchlist = newArr
+        await user.save();
+        res.status(200).send(user.watchlist);
+    } catch (error) {
+        console.log(error)
+        res.status(500).send({message: "error adding to watchlist"})
+    }
+}
