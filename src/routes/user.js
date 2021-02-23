@@ -1,5 +1,5 @@
 const { Router } = require("express");
-const { getMyProfile, addUser, updateUserById, deleteUser, login, logout, addToWatchlist, removeFromWatchlist } = require("../controllers/user");
+const { getMyProfile, addUser, updateUserById, deleteUser, login, logout, addToWatchlist, removeFromWatchlist, followUser, unfollowUser } = require("../controllers/user");
 const userRouter = Router();
 const { hashPassword, auth } = require('../middleware/')
 
@@ -11,6 +11,8 @@ userRouter.patch("/users/removefromwatchlist", auth, removeFromWatchlist);
 userRouter.delete("/users/myprofile", auth, deleteUser);
 userRouter.post("/users/login", login)
 userRouter.get("/users/logout", auth, logout)
+userRouter.patch("/users/follow", auth, followUser)
+userRouter.patch("/users/unfollow", auth, unfollowUser)
 
 
 module.exports = {

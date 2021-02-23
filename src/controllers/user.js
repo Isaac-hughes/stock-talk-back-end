@@ -97,3 +97,47 @@ exports.removeFromWatchlist = async (req, res) => {
         res.status(500).send({message: "error adding to watchlist"})
     }
 }
+
+exports.followUser = async (req, res) => {
+  try {
+      const user = await User.findById(req.user._id);
+      user.following.push(req.body)
+      const followed = await User.findById(req.body._id)
+      followed.followers.push({_id: user._id, username: user.username})
+      await user.save()
+      await followed.save()
+      res.status(200).send("successfully followed user")
+  } catch (error) {
+      console.log(error)
+      res.status(500).send({message: "error trying to follow"})
+  }
+}
+
+exports.unfollowUser = async (req, res) => {
+  try {
+    const user = await User.findById(req.user._id);
+    let data = user.following
+    let newArr = []
+    for (i in data){
+        if (data[i].username != req.body.username){
+            newArr.push(data[i])
+        }
+    }
+    user.following = newArr
+    const followed = await User.findById(req.body._id)
+    let data2 = followed.followers
+    let newArr2 = []
+    for (i in data2){
+        if (data2[i].username != user.username){
+            newArr2.push(data[i])
+        }
+    }
+    followed.followers = newArr2
+    await user.save()
+    await followed.save()
+    res.status(200).send("successfully unfollowed user")
+  } catch (error) {
+    console.log(error)
+    res.status(500).send({message: "error trying to unfollow"})
+  }
+}
