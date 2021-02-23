@@ -19,7 +19,10 @@ const userSchema = new mongoose.Schema({
     "username": {
         type: String,
         required: true,
-        unique: true
+        unique: true,
+        minLength: 3,
+        maxLength: 30,
+        lowercase: true
     },
     "following": [
         {username: String}

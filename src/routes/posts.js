@@ -4,7 +4,7 @@ const { getAllPosts, getPostsByUser, addPost, updatePost, deletePost, tester } =
 const { auth, test } = require('../middleware/')
 
 postRouter.get("/posts", getAllPosts);
-postRouter.get("/posts/:user_id", auth, getPostsByUser);
+postRouter.get("/posts/getbyuser", auth, getPostsByUser);
 postRouter.get("/posts/:user_id", auth, getPostsByUser);
 postRouter.post("/posts", auth, addPost);
 postRouter.patch("/posts/:id", auth, updatePost);

@@ -21,8 +21,8 @@ exports.addUser = async (req, res) => {
       res.status(400).send({ message: "User already exists" })
     } else {
       
+      res.status(500).send({ message: "Could not connect" });
     }
-    res.status(500).send({ message: "Could not connect" });
   }
 };
 
