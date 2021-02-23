@@ -3,7 +3,6 @@ const { User } = require("../models/User");
 
 exports.getMyProfile = async (req, res) => {
     let data = await req.user
-    console.log(data)
 
   res.status(200).send(data)
 }
@@ -14,7 +13,7 @@ exports.addUser = async (req, res) => {
     const user = new User(req.body);
     const token = await user.generateAuthToken()
     const savedUser = await user.save();
-    console.log(req.body);
+    
     res.status(201).send({savedUser, token});
   } catch (error) {
     if (error.code === 11000) {
@@ -29,7 +28,7 @@ exports.addUser = async (req, res) => {
 exports.updateUserById = async (req, res) => {
   try {
     const user = await User.findByIdAndUpdate(req.user._id, req.body, { new: true });
-    console.log(user);
+    
     res.status(200).send(user);
   } catch (error) {
     res.status(404).send({ message: "User not found" });
