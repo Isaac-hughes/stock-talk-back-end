@@ -3,7 +3,6 @@ const { User } = require("../models/User");
 
 exports.getMyProfile = async (req, res) => {
     let data = await req.user
-
   res.status(200).send(data)
 }
 

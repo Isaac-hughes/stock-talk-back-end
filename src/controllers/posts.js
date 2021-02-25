@@ -84,6 +84,37 @@ exports.unlikePost = async (req, res) => {
   }
 }
 
+exports.getPostsByFollowing = async (req, res) => {
+  try {
+    const user = await User.findById(req.user._id);
+    const following = user.following
+    let postArray = []
+    for(i in following){
+      let posts = await Post.find({username: following[i].username});
+      for(i in posts){
+        postArray.push(posts[i])
+      }
+    }
+    postArray.sort(function(a, b) {
+      var timeA = a.createdAt; 
+      var timeB = b.createdAt;
+      if (timeA < timeB) {
+        return 1;
+      }
+      if (timeA > timeB) {
+        return -1;
+      }
+      return 0;
+    });
+    res.status(200).send(postArray)
+  } catch (error) {
+    console.log(error)
+  }
+  
+
+}
+
+
 exports.tester = (req, res) => {
   res.status(200).send({message: "test passed"})
 }

@@ -51,7 +51,7 @@ userSchema.statics.findByCredentials = async (email, password) => {
     return user 
 }
 
-userSchema.methods.toJSON = async function() {
+userSchema.methods.toJSON = function() {
     const userObject = this.toObject();
     delete userObject.password;
     delete userObject.tokens;
