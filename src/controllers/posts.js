@@ -16,7 +16,16 @@ exports.getPostsByUser = async (req, res) => {
     const allPosts = await Post.find({author: req.body._id});
     res.status(200).send(allPosts);
   } catch (error) {
-    res.status(404).send({ message: "user not found" });
+    res.status(404).send({ message: "post not found" });
+  }
+};
+
+exports.getPostByID = async (req, res) => {
+  try {
+    const post = await Post.find({_id: req.body._id});
+    res.status(200).send(post);
+  } catch (error) {
+    res.status(404).send({ message: "post not found" });
   }
 };
 
