@@ -3,7 +3,7 @@ const postRouter = Router();
 const { getAllPosts, getPostsByUser, getPostsByFollowing, getPostByID, addPost, updatePost, deletePost, tester, likePost, unlikePost } = require("../controllers/posts");
 const { auth, test } = require('../middleware/')
 
-postRouter.get("/posts", getAllPosts);
+postRouter.get("/posts", auth, getAllPosts);
 postRouter.get("/posts/getbyuser", auth, getPostsByUser);
 postRouter.get("/posts/getbyfollowing", auth, getPostsByFollowing);
 postRouter.get("/posts/getbyid/:id", auth, getPostByID);

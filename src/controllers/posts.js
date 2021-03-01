@@ -3,8 +3,23 @@ const {User} = require("../models/User")
 
 exports.getAllPosts = async (req, res) => {
   try {
-    const allPosts = await Post.find({});
-    res.status(200).send(allPosts);
+    const allPosts = await Post.find({}).limit(64);
+    let postArray = []
+    for(i in allPosts){
+      postArray.push(allPosts[i])
+    }
+    postArray.sort(function(a, b) {
+      var timeA = a.createdAt; 
+      var timeB = b.createdAt;
+      if (timeA < timeB) {
+        return 1;
+      }
+      if (timeA > timeB) {
+        return -1;
+      }
+      return 0;
+    });
+    res.status(200).send(postArray);
   } catch (error) {
     console.log(error);
     res.status(500).send(error);
@@ -103,6 +118,10 @@ exports.getPostsByFollowing = async (req, res) => {
       for(i in posts){
         postArray.push(posts[i])
       }
+    }
+    const userPosts = await Post.find({username: req.user.username})
+    for(i in userPosts){
+      postArray.push(userPosts[i])
     }
     postArray.sort(function(a, b) {
       var timeA = a.createdAt; 
