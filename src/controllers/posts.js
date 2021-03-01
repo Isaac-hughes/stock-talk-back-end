@@ -22,7 +22,7 @@ exports.getPostsByUser = async (req, res) => {
 
 exports.getPostByID = async (req, res) => {
   try {
-    const post = await Post.find({_id: req.body._id});
+    const post = await Post.find({_id: req.params.id});
     res.status(200).send(post);
   } catch (error) {
     res.status(404).send({ message: "post not found" });
@@ -68,7 +68,7 @@ exports.likePost = async (req, res) => {
     arr.push({username: user.username})
     post.likes = arr
     await post.save()
-    res.status(200).send("Liked")
+    res.status(200).send({message: "Liked"})
   } catch (error) {
     res.status(404).send({ message: "post not found" });
   }
@@ -87,7 +87,7 @@ exports.unlikePost = async (req, res) => {
     }
     post.likes = newArr
     await post.save();
-    res.status(200).send("unliked")
+    res.status(200).send({message: "unliked"})
   } catch (error) {
     res.status(404).send({ message: "post not found" });
   }
