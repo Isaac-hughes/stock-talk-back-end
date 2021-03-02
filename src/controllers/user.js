@@ -6,6 +6,14 @@ exports.getMyProfile = async (req, res) => {
   res.status(200).send(data)
 }
 
+exports.getUserByUsername = async (req, res) => {
+  try {
+    const user = await User.find({username: req.params.username});
+    res.status(200).send(user);
+  } catch (error) {
+    res.status(404).send({ message: "user not found" });
+  }
+};
 
 exports.addUser = async (req, res) => {
   try {

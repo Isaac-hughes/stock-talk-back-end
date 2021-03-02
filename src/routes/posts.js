@@ -4,7 +4,7 @@ const { getAllPosts, getPostsByUser, getPostsByFollowing, getPostByID, addPost, 
 const { auth, test } = require('../middleware/')
 
 postRouter.get("/posts", auth, getAllPosts);
-postRouter.get("/posts/getbyuser", auth, getPostsByUser);
+postRouter.get("/posts/getbyuser/:username", auth, getPostsByUser);
 postRouter.get("/posts/getbyfollowing", auth, getPostsByFollowing);
 postRouter.get("/posts/getbyid/:id", auth, getPostByID);
 postRouter.post("/posts", auth, addPost);
