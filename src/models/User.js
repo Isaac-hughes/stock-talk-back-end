@@ -31,9 +31,6 @@ const userSchema = new mongoose.Schema({
     "followers": [
         {username: String}
     ],
-    "watchlist": [
-        {ticker: {type: String}}
-    ],
     "tokens": [
         {token: {type: String}}
     ]

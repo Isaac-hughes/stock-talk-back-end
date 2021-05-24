@@ -7,8 +7,6 @@ userRouter.get("/users/myprofile", auth, getMyProfile);
 userRouter.get("/users/:username", auth, getUserByUsername);
 userRouter.post("/users", hashPassword ,addUser);
 userRouter.patch("/users/myprofile", auth, hashPassword ,updateUserById);
-userRouter.patch("/users/addtowatchlist", auth, addToWatchlist);
-userRouter.patch("/users/removefromwatchlist", auth, removeFromWatchlist);
 userRouter.delete("/users/myprofile", auth, deleteUser);
 userRouter.post("/users/login", login)
 userRouter.get("/users/logout", auth, logout)
